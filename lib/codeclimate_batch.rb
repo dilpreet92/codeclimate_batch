@@ -8,9 +8,8 @@ module CodeclimateBatch
     def start
       return if travis? && (outside_default_branch? && !pull_request?)
       ENV['CODECLIMATE_TO_FILE'] = '1' # write results to file since we need to combine them before sending
-      gem 'codeclimate-test-reporter', '>= 0.4.8' # get CODECLIMATE_TO_FILE support and avoid deprecations
-      require 'codeclimate-test-reporter'
-      CodeClimate::TestReporter.start
+      require 'simplecov'
+      SimpleCov.start
     end
 
     def unify(coverage_files)
